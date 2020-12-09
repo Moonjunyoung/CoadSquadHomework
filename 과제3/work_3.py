@@ -34,4 +34,24 @@ class Cube:
             self.Print_Cube_Lower(i)
             print('\t\t\t',end='')
 
-    
+    def Print_Total_Cube_Upper(self): # 큐브의 전개도에서 맨 위 부분을 출력 (파란색)
+        print('\t'*6, end='')
+        self.Print_Cube_Upper(0)
+        print()
+        print('\t'*6, end='')
+        self.Print_Cube_Center(0)
+        print()
+        print('\t'*6, end='')
+        self.Print_Cube_Lower(0)
+
+    def Print_Total_Cube_Lower(self): # 큐브의 전개도에서 맨 아래부분을 출력 (빨간색)
+        print('\t' * 6, end='')
+        self.Print_Cube_Upper(1)
+        print()
+        print('\t' * 6, end='')
+        self.Print_Cube_Center(1)
+        print()
+        print('\t' * 6, end='')
+        self.Print_Cube_Lower(1)
+
+
