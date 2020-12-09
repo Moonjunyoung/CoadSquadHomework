@@ -54,4 +54,12 @@ class Cube:
         print('\t' * 6, end='')
         self.Print_Cube_Lower(1)
 
+    def Print_Total_Cube(self): ## 큐브의 전개도를 전체를 출력 
+        self.Print_Total_Cube_Upper()
+        print()
+        self.Print_Total_Cube_Center()
+        print()
+        self.Print_Total_Cube_Lower()
+        print()
+        print()
 
