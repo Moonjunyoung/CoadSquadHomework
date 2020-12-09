@@ -54,7 +54,7 @@ class Cube:
         print('\t' * 6, end='')
         self.Print_Cube_Lower(1)
 
-    def Print_Total_Cube(self): ## 큐브의 전개도를 전체를 출력 
+    def Print_Total_Cube(self): ## 큐브의 전개도 전체를 출력 (큐브전체 출력)
         self.Print_Total_Cube_Upper()
         print()
         self.Print_Total_Cube_Center()
@@ -62,4 +62,21 @@ class Cube:
         self.Print_Total_Cube_Lower()
         print()
         print()
+
+
+    # 2. 큐브면을 시계 방향 및 반시계방향으로 돌려주는 함수
+    
+    def Clock_Wise(self,cube):  # 2-1. 현재 큐브의 상태를 시계방향으로 돌려준다.
+        Temp_Cube = [[0 for _ in range(3)] for _ in range(3)]
+        for i in range(3):
+            for j in range(3):
+                Temp_Cube[i][j] = cube[2 - j][i]
+        return Temp_Cube
+    
+    def Anti_Clockwise(self,cube): # 2-2. 현재 큐브의 상태를 반시계 방향으로 돌려준다.
+        Temp_Cube = [[0 for _ in range(3)] for _ in range(3)]
+        for i in range(3):
+            for j in range(3):
+                Temp_Cube[i][j] = cube[j][2 - i]
+        return Temp_Cube
 
