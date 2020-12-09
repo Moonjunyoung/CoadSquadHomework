@@ -1,3 +1,5 @@
+from collections import deque
+
 def List_to_CorrectCommandlist(Command_list): # 들어오는 명령어를 올바른 명령어로 바꾸어주는 함수
     Command_List_Index = 0
     Change_Command_list=[]
@@ -11,7 +13,7 @@ def List_to_CorrectCommandlist(Command_list): # 들어오는 명령어를 올바
 
 class Cube:
     def __init__(self):
-        self.cube=[['R','R','W'],['G','C','W'],['G','B','B']] # 0. 3x3 초기큐브 값 설정해주는 생성자
+        self.cube=[['R','R','W'],['G','C','W'],['G','B','B']] # 0. 3x3 초기큐브 값 설정
 
     def Set_Cube_Upper(self,upper_cube): # 1-1. upper_cube의값으로 최상단 큐브값 설정
         for i in range(len(upper_cube)):
@@ -48,7 +50,7 @@ class Cube:
                 print(self.cube[i][j],end=' ')
             print()
         print()
-    
+
     def Upper_Push_to_Left(self): # 4.1.1 큐브의 가장 윗줄을 왼쪽으로 한칸밀기
         upper_cube=deque(self.Get_Cube_Upper())
         upper_cube.rotate(-1)
@@ -86,3 +88,40 @@ class Cube:
         left_cube.rotate(-1)
         self.Set_Cube_Left(left_cube)
 
+
+cube=Cube() # 큐브 객체생성
+cube.Print() 
+
+while True:
+      Command_List=list(input("CUBE>").strip())
+      Command_List=List_to_CorrectCommandlist(Command_List)
+      for command in Command_List:
+          if command=='Q':
+              print('Bye~')
+              exit(0)
+          elif command=='U':
+               print('U')
+               cube.Upper_Push_to_Left()
+          elif command=="U'":
+               print("U'")
+               cube.Upper_Push_to_Right()
+          elif command=='R':
+               print('R')
+               cube.Right_Push_to_Up()
+          elif command=="R'":
+               print("R'")
+               cube.Right_Push_to_Down()
+          elif command=='L':
+               print('L')
+               cube.Left_Push_to_Down()
+          elif command=="L'":
+               print("L'")
+               cube.Left_Push_to_Up()
+          elif command=='B':
+               print('B')
+               cube.Lower_Push_to_Right()
+          elif command=="B'":
+               print("B'")
+               cube.Lower_Push_to_Left()
+
+          cube.Print()
