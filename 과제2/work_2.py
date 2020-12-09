@@ -2,13 +2,14 @@ from collections import deque
 
 def List_to_CorrectCommandlist(Command_list): # 들어오는 명령어를 올바른 명령어로 바꾸어주는 함수
     Command_List_Index = 0
-    Change_Command_list=[]
+    Change_Command_list=[] # 제대로 된 명령어를 만들기위한 저장소
     while Command_List_Index < len(Command_list):
         if Command_list[Command_List_Index] == "'":
             Change_Command_list[-1] += "'"
         else:
             Change_Command_list.append(Command_list[Command_List_Index])
         Command_List_Index += 1
+
     return Change_Command_list
 
 class Cube:
@@ -90,7 +91,7 @@ class Cube:
 
 
 cube=Cube() # 큐브 객체생성
-cube.Print() 
+cube.Print()
 
 # 명령어에 따라 큐브에 맞는 기능을 실행시켜주는 메인 함수
 while True:
@@ -124,5 +125,7 @@ while True:
           elif command=="B'":
                print("B'")
                cube.Lower_Push_to_Left()
+          else: # 잘못된 명령어 인경우
+              continue
 
-          cube.Print()
+          cube.Print() # 현재 큐브상태출력
