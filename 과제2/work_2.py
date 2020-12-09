@@ -92,6 +92,7 @@ class Cube:
 cube=Cube() # 큐브 객체생성
 cube.Print() 
 
+# 명령어에 따라 큐브에 맞는 기능을 실행시켜주는 메인 함수
 while True:
       Command_List=list(input("CUBE>").strip())
       Command_List=List_to_CorrectCommandlist(Command_List)
