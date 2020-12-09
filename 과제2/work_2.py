@@ -1,3 +1,13 @@
+def List_to_CorrectCommandlist(command_list):
+    idx = 0
+    tmp=[]
+    while idx < len(command_list):
+        if command_list[idx] == "'":
+            tmp[-1] += "'"
+        else:
+            tmp.append(command_list[idx])
+        idx += 1
+    return tmp
 
 class Cube:
     def __init__(self):
