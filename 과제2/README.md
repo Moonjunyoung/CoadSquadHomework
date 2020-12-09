@@ -20,4 +20,5 @@
     - 큐브의 가장 왼쪽을 위로 한칸 밀기 (Left_Push_to_Up)
     
   - 명령어에 따라 큐브에 맞는 기능을 수행해주는 기능
+    -  '가 들어오는것을 올바르게 처리해주는 기능 (List_to_CorrectCommandlist)
   
