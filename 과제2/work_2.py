@@ -1,17 +1,17 @@
-def List_to_CorrectCommandlist(command_list):
-    idx = 0
-    tmp=[]
-    while idx < len(command_list):
-        if command_list[idx] == "'":
-            tmp[-1] += "'"
+def List_to_CorrectCommandlist(Command_list): # 들어오는 명령어를 올바른 명령어로 바꾸어주는 함수
+    Command_List_Index = 0
+    Change_Command_list=[]
+    while Command_List_Index < len(Command_list):
+        if Command_list[Command_List_Index] == "'":
+            Change_Command_list[-1] += "'"
         else:
-            tmp.append(command_list[idx])
-        idx += 1
-    return tmp
+            Change_Command_list.append(Command_list[Command_List_Index])
+        Command_List_Index += 1
+    return Change_Command_list
 
 class Cube:
     def __init__(self):
-        self.cube=[['R','R','W'],['G','C','W'],['G','B','B']] # 0. 3x3 초기큐브 값 설정
+        self.cube=[['R','R','W'],['G','C','W'],['G','B','B']] # 0. 3x3 초기큐브 값 설정해주는 생성자
 
     def Set_Cube_Upper(self,upper_cube): # 1-1. upper_cube의값으로 최상단 큐브값 설정
         for i in range(len(upper_cube)):
@@ -48,3 +48,41 @@ class Cube:
                 print(self.cube[i][j],end=' ')
             print()
         print()
+    
+    def Upper_Push_to_Left(self): # 4.1.1 큐브의 가장 윗줄을 왼쪽으로 한칸밀기
+        upper_cube=deque(self.Get_Cube_Upper())
+        upper_cube.rotate(-1)
+        self.Set_Cube_Upper(upper_cube)
+    def Upper_Push_to_Right(self):  # 4.1.2 큐브의 가장 윗줄을 오른쪽으로 한칸밀기
+        upper_cube = deque(self.Get_Cube_Upper())
+        upper_cube.rotate(1)
+        self.Set_Cube_Upper(upper_cube)
+    def Lower_Push_to_Left(self): # 4.2.1 큐브의 가장 아랫줄을 왼쪽으로 한칸 밀기
+        lower_cube= deque(self.Get_Cube_Lower())
+        lower_cube.rotate(-1)
+        self.Set_Cube_Lower(lower_cube)
+    def Lower_Push_to_Right(self): # 4.2.2 큐브의 가장 아랫줄을 오른쪽으로 한칸 밀기
+        lower_cube = deque(self.Get_Cube_Lower())
+        lower_cube.rotate(1)
+        self.Set_Cube_Lower(lower_cube)
+
+    def Right_Push_to_Up(self): # 4.3.1 큐브의 가장 오른쪽을 위로 한칸밀기
+        right_cube=deque(self.Get_Cube_Right())
+        right_cube.rotate(-1)
+        self.Set_Cube_Right(right_cube)
+
+    def Right_Push_to_Down(self): # 4.3.2 큐브의 가장 오른쪽을 아래로 한칸밀기
+        right_cube=deque(self.Get_Cube_Right())
+        right_cube.rotate(1)
+        self.Set_Cube_Right(right_cube)
+
+    def Left_Push_to_Down(self): # 4.4.1 큐브의 가장 왼쪽을 아래로 한칸 밀기
+        left_cube=deque(self.Get_Cube_Left())
+        left_cube.rotate(1)
+        self.Set_Cube_Left(left_cube)
+
+    def Left_Push_to_Up(self): # 4.4.2 큐브의 가장 왼쪽을 아래로 위로 한칸 밀기
+        left_cube=deque(self.Get_Cube_Left())
+        left_cube.rotate(-1)
+        self.Set_Cube_Left(left_cube)
+
