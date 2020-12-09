@@ -80,3 +80,32 @@ class Cube:
                 Temp_Cube[i][j] = cube[j][2 - i]
         return Temp_Cube
 
+    # 3. U,U',L,L' 동작을 수행시키는 기능
+
+    def Upper_Rotate_Clock(self): #  3-1. U 큐브 윗면 을 시계 방향으로 돌려준다
+        cube=self.cube
+        # 왼쪽면 맨위 = 앞면 맨위, 뒷면 맨위 = 왼쪽면 맨위 , 오른쪽면 맨위 = 뒷면 맨위 , 앞면 맨위 = 오른쪽면 맨위
+        cube[4][0], cube[3][0], cube[5][0], cube[2][0] = cube[2][0], cube[4][0], cube[3][0], cube[5][0]
+        # 윗면을 시계 방향으로 회전시킨다.
+        cube[0]=self.Clock_Wise(cube[0])
+
+    def Upper_Rotate_Anti_ClockWise(self): # 3-2. U' 큐브 윗면을 반시계 방향으로 돌려준다.
+        cube=self.cube
+        # 오른쪽면 맨위 = 앞면 맨위 , 뒷면 맨위 = 오른쪽면 맨위  , 왼쪽면 맨위 = 뒷면 맨위  , 앞면 맨위 = 왼쪽면 맨위
+        cube[5][0], cube[3][0], cube[4][0], cube[2][0] = cube[2][0], cube[5][0], cube[3][0], cube[4][0]
+        # 윗면을 반시계 방향으로 회전 시킨다.
+        cube[0] = self.Anti_Clockwise(cube[0])
+
+    def Lower_Rotate_ClockWise(self): # 3-3. L 큐브 아랫면을 시계방향으로 돌린다.
+        # 오른쪽면 맨 아래 = 앞면 맨아래 , 뒷면 맨 아래 = 오른쪽면 맨아래 , 왼쪽면 맨 아래 = 뒷면 맨아래 , 앞면 맨아래 = 왼쪽면 맨아래
+        cube=self.cube
+        cube[5][2], cube[3][2], cube[4][2], cube[2][2] = cube[2][2], cube[5][2], cube[3][2], cube[4][2]
+        cube[1] = self.Clock_Wise(cube[1]) #아랫면을 시계방향으로 돌린다
+
+    def Lower_Rotate_Anti_ClockWise(self): # 3-4. L' 큐브 아랫면을 반시계 방향으로 돌린다.
+        cube=self.cube
+        # 왼쪽면 맨아래 = 앞면 맨아래 , 뒷면 맨아래 = 왼쪽면 맨 아래 , 오른쪽면 맨아래 = 뒷면 맨아래 , 앞면 맨아래 = 오른쪽면 맨아래
+        cube[4][2], cube[3][2], cube[5][2], cube[2][2] = cube[2][2], cube[4][2], cube[3][2], cube[5][2]
+        cube[1] = self.Anti_Clockwise(cube[1]) ##아랫면을 반시계 방향으로 돌림
+
+
