@@ -233,6 +233,13 @@ class Cube:
         cube[2][0][2], cube[2][1][2], cube[2][2][2] = UpperCube_col_0_2,UpperCube_col_1_2,UpperCube_col_2_2
         cube[5] = self.Anti_Clockwise(cube[5])
 
+class Cube_Game:
+    def __init__(self,start_time):
+       self.Start_Time=start_time # 큐브게임의 시작시간을 저장
+       self.Command_Count=0 # 명령어 횟수를 기록
+
+
+
 
 while True: # 들어오는 명령어에 따라 큐브를 돌려준다.
     Command_List = list(input("CUBE>").strip())
@@ -279,4 +286,4 @@ while True: # 들어오는 명령어에 따라 큐브를 돌려준다.
         else: #잘못된 명령어가 들어올시
             continue
 
-        cube.Print_Total_Cube()
+        cube.Print_Total_Cube() # 큐브를 돌렸으니 현재 큐브를 출력
