@@ -249,9 +249,30 @@ class Cube_Game: # 큐브 게임을 진행하는 클래스
         return
 
 
+    def Shuffle_Cube_List(self,cube): ## 셔플 시키기 위해 현재 큐브값을 1차원 리스트로 바꿔준다.
+        Current_Cube = cube
+        Shuffle_List=[]
+        for Cube_number in Current_Cube:
+            for row in Cube_number:
+                for col in row:
+                    Shuffle_List.append(col)
+        return Shuffle_List
+    
+    def Shuffle_Cube(self,cube): ## 셔플시킨 1차원리스트를 기존 큐브에 반영시키는 함수 (큐브를 셔플시켜주는역활)
+        Current_Cube=cube.cube
+        Shuffle_List=self.Shuffle_Cube_List(Current_Cube)
+        random.shuffle(Shuffle_List)
+        for Cube_number in range(len(Current_Cube)):
+            for row in range(3):
+                for col in range(3):
+                    Current_Cube[Cube_number][row][col]=Shuffle_List.pop(0)
+    
+
+
 
 cube=Cube()
-Cube_Game=Cube_Game(time.time())
+Cube_Game=Cube_Game(time.time()) # 큐브게임이 시작되었다.
+Cube_Game.Shuffle_Cube(cube) # 큐브를 랜덤으로 돌려준다.
 cube.Print_Total_Cube()
 
 
@@ -303,4 +324,3 @@ while True: # 들어오는 명령어에 따라 큐브를 돌려준다.
 
         cube.Print_Total_Cube() # 큐브를 돌렸으니 현재 큐브를 출력
         Cube_Game.Command_Count+=1 # 큐브게임의 진행횟수값 증가
-        
