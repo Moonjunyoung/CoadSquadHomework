@@ -306,6 +306,9 @@ while True: # 들어오는 명령어에 따라 큐브를 돌려준다.
     Command_List = list(input("CUBE>").strip())
     Command_List = List_to_CorrectCommandlist(Command_List)
     for command in Command_List:
+        if Cube_Game.Game_Win(cube): # 게임에서 승리할수 있는 조건인지 체크한다.
+           Cube_Game.Game_Clear() # 게임에서 승리하는 메시지를 출력한다.
+           exit(0)
         if command == 'Q':
             Cube_Game.Game_Over()
             exit(0)
