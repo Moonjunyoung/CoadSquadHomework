@@ -136,5 +136,30 @@ class Cube:
         cube[1][0][0], cube[1][0][1], cube[1][0][2] = LeftCube_Col_0_2,LeftCube_Col_1_2,LeftCube_Col_2_2
         #반시계 방향으로 회전
         cube[2] = self.Anti_Clockwise(cube[2])
+    
+    def Back_Rotate_ClockWise(self): # 3-7 B 큐브의 뒷면을 시계 방향으로 돌린다.
+        cube=self.cube
+        LeftCube_col_0_0,LeftCube_col_1_0,LeftCube_col_2_0= cube[4][0][0], cube[4][1][0], cube[4][2][0]
+        # 1. 왼쪽면 맨 왼쪽 값 = 윗면 맨 위쪽 값
+        cube[4][0][0], cube[4][1][0], cube[4][2][0] = cube[0][0][2], cube[0][0][1], cube[0][0][0]
+        # 2 . 윗면 맨 위쪽값들 = 오른쪽 면 맨 오른쪽 값
+        cube[0][0][2], cube[0][0][1], cube[0][0][0] = cube[5][2][2], cube[5][1][2], cube[5][0][2]
+        # 3. 오른쪽면 오른쪽 값 = 아랫면 맨 아래쪽값
+        cube[5][2][2], cube[5][1][2], cube[5][0][2] = cube[1][2][0], cube[1][2][1], cube[1][2][2]
+        # 4. 아랫면 맨 아래쪽값들 = 왼쪽면 맨 왼쪽값
+        cube[1][2][0], cube[1][2][1], cube[1][2][2] = LeftCube_col_0_0,LeftCube_col_1_0,LeftCube_col_2_0
+        cube[3] = self.Clock_Wise(cube[3])
 
-        
+    def Back_Rotate_AntiClockWise(self): # 3-8 큐브의  뒷면을 반시계 방향으로 돌린다.
+        cube=self.cube
+        LeftCube_col_0_0, LeftCube_col_1_0, LeftCube_col_2_0= cube[4][0][0], cube[4][1][0], cube[4][2][0]
+        # 1. 왼쪽면 맨 왼쪽값 = 아랫면 맨아래값
+        cube[4][0][0], cube[4][1][0], cube[4][2][0] = cube[1][2][0], cube[1][2][1], cube[1][2][2]
+        # 2. 아랫면 맨 아래 쪽 값 = 오른쪽면 맨 오른쪽 값
+        cube[1][2][0], cube[1][2][1], cube[1][2][2] = cube[5][2][2], cube[5][1][2], cube[5][0][2]
+        # 3. 오른쪽면 맨 오른쪽 값 = 윗면 맨 위쪽 값들
+        cube[5][2][2], cube[5][1][2], cube[5][0][2] = cube[0][0][2], cube[0][0][1], cube[0][0][0]
+        # 4. 윗면 맨 위쪽 값 = 왼쪽면 맨 왼쪽값들
+        cube[0][0][2], cube[0][0][1], cube[0][0][0] = LeftCube_col_0_0,LeftCube_col_1_0,LeftCube_col_2_0
+        cube[3] = self.Anti_Clockwise(cube[3])
+
