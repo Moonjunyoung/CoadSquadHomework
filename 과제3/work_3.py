@@ -1,3 +1,7 @@
+import time
+from datetime import timedelta
+import random
+
 def List_to_CorrectCommandlist(Command_list): # 들어오는 명령어를 올바른 명령어로 바꾸어주는 함수
     Command_List_Index = 0
     Change_Command_list=[]
@@ -233,12 +237,22 @@ class Cube:
         cube[2][0][2], cube[2][1][2], cube[2][2][2] = UpperCube_col_0_2,UpperCube_col_1_2,UpperCube_col_2_2
         cube[5] = self.Anti_Clockwise(cube[5])
 
-class Cube_Game:
+class Cube_Game: # 큐브 게임을 진행하는 클래스
     def __init__(self,start_time):
        self.Start_Time=start_time # 큐브게임의 시작시간을 저장
        self.Command_Count=0 # 명령어 횟수를 기록
+    
+    def Game_Over(self): # 게임 종료시 경과시간 및 조작회수를 출력해주는 함수
+        print("경과시간",timedelta(seconds=int(time.time()-self.Start_Time)))
+        print("조작횟수 : ",self.Command_Count)
+        print('이용해 주셔서 감사합니다. 뚜뚜뚜.')
+        return
 
 
+
+cube=Cube()
+Cube_Game=Cube_Game(time.time())
+cube.Print_Total_Cube()
 
 
 while True: # 들어오는 명령어에 따라 큐브를 돌려준다.
@@ -246,6 +260,7 @@ while True: # 들어오는 명령어에 따라 큐브를 돌려준다.
     Command_List = List_to_CorrectCommandlist(Command_List)
     for command in Command_List:
         if command == 'Q':
+            Cube_Game.Game_Over()
             exit(0)
         elif command== 'U':
              print('U')
@@ -287,3 +302,5 @@ while True: # 들어오는 명령어에 따라 큐브를 돌려준다.
             continue
 
         cube.Print_Total_Cube() # 큐브를 돌렸으니 현재 큐브를 출력
+        Cube_Game.Command_Count+=1 # 큐브게임의 진행횟수값 증가
+        
