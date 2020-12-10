@@ -233,3 +233,50 @@ class Cube:
         cube[2][0][2], cube[2][1][2], cube[2][2][2] = UpperCube_col_0_2,UpperCube_col_1_2,UpperCube_col_2_2
         cube[5] = self.Anti_Clockwise(cube[5])
 
+
+while True: # 들어오는 명령어에 따라 큐브를 돌려준다.
+    Command_List = list(input("CUBE>").strip())
+    Command_List = List_to_CorrectCommandlist(Command_List)
+    for command in Command_List:
+        if command == 'Q':
+            exit(0)
+        elif command== 'U':
+             print('U')
+             cube.Upper_Rotate_Clock()
+        elif command== "U'":
+             print("U'")
+             cube.Upper_Rotate_Anti_ClockWise()
+        elif command=='L':
+             print('L')
+             cube.Left_Rotate_ClockWise()
+        elif command=="L'":
+             print("L'")
+             cube.Left_Rotate_AntiClockWise()
+        elif command=='F':
+             print('F')
+             cube.Front_Rotate_ClockWise()
+        elif command=="F'":
+             print("F'")
+             cube.Front_Rotate_AntiClockWise()
+        elif command=="R":
+             print('R')
+             cube.Right_Rotate_ClockWise()
+        elif command=="R'":
+             print("R'")
+             cube.Right_Rotate_AntiClockWise()
+        elif command=='B':
+            print('B')
+            cube.Back_Rotate_ClockWise()
+        elif command=="B'":
+             print("B'")
+             cube.Back_Rotate_AntiClockWise()
+        elif command=='D':
+             print('D')
+             cube.Lower_Rotate_ClockWise()
+        elif command=="D'":
+             print("D'")
+             cube.Lower_Rotate_Anti_ClockWise()
+        else: #잘못된 명령어가 들어올시
+            continue
+
+        cube.Print_Total_Cube()
