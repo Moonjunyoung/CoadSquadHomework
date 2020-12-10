@@ -1,3 +1,20 @@
+def List_to_CorrectCommandlist(Command_list): # 들어오는 명령어를 올바른 명령어로 바꾸어주는 함수
+    Command_List_Index = 0
+    Change_Command_list=[]
+    while Command_List_Index < len(Command_list):
+        if Command_list[Command_List_Index] == "'": # 1. ' 이 들어온경우 
+            Change_Command_list[-1] += "'"
+        elif len(Change_Command_list)!=0 and str(Change_Command_list[-1]).isnumeric(): #2. 숫자인경우
+             for i in range(int(Change_Command_list.pop())):
+                 Change_Command_list.append(Command_list[Command_List_Index])
+        else:
+            Change_Command_list.append(Command_list[Command_List_Index])
+
+        Command_List_Index += 1
+
+    return Change_Command_list
+
+
 class Cube:
     def __init__(self):
         self.cube = [[['B', 'B', 'B'], ['B', 'B', 'B'], ['B', 'B', 'B']],  # 윗면 파란색  0
@@ -80,7 +97,8 @@ class Cube:
                 Temp_Cube[i][j] = cube[j][2 - i]
         return Temp_Cube
 
-    # 3. U,U',L,L' 동작을 수행시키는 기능
+
+    # 3. U,U',L,L',R,R',F,F',D,D',B,B' 동작을 수행시키는 기능
 
     def Upper_Rotate_Clock(self): #  3-1-1 U 큐브 윗면 을 시계 방향으로 돌려준다
         cube=self.cube
@@ -96,13 +114,13 @@ class Cube:
         # 윗면을 반시계 방향으로 회전 시킨다.
         cube[0] = self.Anti_Clockwise(cube[0])
 
-    def Lower_Rotate_ClockWise(self): # 3-2-1 L 큐브 아랫면을 시계방향으로 돌린다.
+    def Lower_Rotate_ClockWise(self): # 3-2-1 D 큐브 아랫면을 시계방향으로 돌린다.
         # 오른쪽면 맨 아래 = 앞면 맨아래 , 뒷면 맨 아래 = 오른쪽면 맨아래 , 왼쪽면 맨 아래 = 뒷면 맨아래 , 앞면 맨아래 = 왼쪽면 맨아래
         cube=self.cube
         cube[5][2], cube[3][2], cube[4][2], cube[2][2] = cube[2][2], cube[5][2], cube[3][2], cube[4][2]
         cube[1] = self.Clock_Wise(cube[1]) #아랫면을 시계방향으로 돌린다
 
-    def Lower_Rotate_Anti_ClockWise(self): # 3-2-1  L' 큐브 아랫면을 반시계 방향으로 돌린다.
+    def Lower_Rotate_Anti_ClockWise(self): # 3-2-1  D' 큐브 아랫면을 반시계 방향으로 돌린다.
         cube=self.cube
         # 왼쪽면 맨아래 = 앞면 맨아래 , 뒷면 맨아래 = 왼쪽면 맨 아래 , 오른쪽면 맨아래 = 뒷면 맨아래 , 앞면 맨아래 = 오른쪽면 맨아래
         cube[4][2], cube[3][2], cube[5][2], cube[2][2] = cube[2][2], cube[4][2], cube[3][2], cube[5][2]
@@ -214,3 +232,4 @@ class Cube:
         # 4. 앞면 맨 오른쪽값 = 윗면 맨 오른쪽값
         cube[2][0][2], cube[2][1][2], cube[2][2][2] = UpperCube_col_0_2,UpperCube_col_1_2,UpperCube_col_2_2
         cube[5] = self.Anti_Clockwise(cube[5])
+
