@@ -241,7 +241,16 @@ class Cube_Game: # 큐브 게임을 진행하는 클래스
     def __init__(self,start_time):
        self.Start_Time=start_time # 큐브게임의 시작시간을 저장
        self.Command_Count=0 # 명령어 횟수를 기록
+       self.End_Cube = [[['B', 'B', 'B'], ['B', 'B', 'B'], ['B', 'B', 'B']],  # 윗면 파란색  0
+                    [['R', 'R', 'R'], ['R', 'R', 'R'], ['R', 'R', 'R']],  # 아랫면 빨간색 1
+                    [['O', 'O', 'O'], ['O', 'O', 'O'], ['O', 'O', 'O']],  # 앞면 오렌지색  2
+                    [['Y', 'Y', 'Y'], ['Y', 'Y', 'Y'], ['Y', 'Y', 'Y']],  # 뒷면 노란색 3
+                    [['W', 'W', 'W'], ['W', 'W', 'W'], ['W', 'W', 'W']],  # 왼쪽면 흰색 4
+                    [['G', 'G', 'G'], ['G', 'G', 'G'], ['G', 'G', 'G']]]  # 오른쪽면 초록색 5
+                    # 게임을 종료시키기위한 큐브값
     
+    # 1. 게임 진행자가 Q를 입력했을시 발생하는 기능
+
     def Game_Over(self): # 게임 종료시 경과시간 및 조작회수를 출력해주는 함수
         print("경과시간",timedelta(seconds=int(time.time()-self.Start_Time)))
         print("조작횟수 : ",self.Command_Count)
@@ -249,7 +258,8 @@ class Cube_Game: # 큐브 게임을 진행하는 클래스
         return
 
 
-    def Shuffle_Cube_List(self,cube): ## 셔플 시키기 위해 현재 큐브값을 1차원 리스트로 바꿔준다.
+    # 2. 현재 큐브를 셔플 해주는 기능 
+    def Shuffle_Cube_List(self,cube): ## 2-1 셔플 시키기 위해 현재 큐브값을 1차원 리스트로 바꿔준다.
         Current_Cube = cube
         Shuffle_List=[]
         for Cube_number in Current_Cube:
@@ -258,7 +268,7 @@ class Cube_Game: # 큐브 게임을 진행하는 클래스
                     Shuffle_List.append(col)
         return Shuffle_List
     
-    def Shuffle_Cube(self,cube): ## 셔플시킨 1차원리스트를 기존 큐브에 반영시키는 함수 (큐브를 셔플시켜주는역활)
+    def Shuffle_Cube(self,cube): ## 2-2 1차원리스트를 셔플시켜 기존 큐브에 반영시키는 함수 (큐브를 셔플시켜주는역할)
         Current_Cube=cube.cube
         Shuffle_List=self.Shuffle_Cube_List(Current_Cube)
         random.shuffle(Shuffle_List)
@@ -266,6 +276,22 @@ class Cube_Game: # 큐브 게임을 진행하는 클래스
             for row in range(3):
                 for col in range(3):
                     Current_Cube[Cube_number][row][col]=Shuffle_List.pop(0)
+
+
+    # 3. 게임을 클리어 할수있는지 결정하는 기능 구현
+    def Game_Win(self,cube): # 정답 큐브와 현재 큐브의값을 비교하여 모두 같을경우 True 반환 ,아니면 False반환
+        Current_Cube=cube.cube
+        for Cube_number in range(len(Current_Cube)):
+            for row in range(3):
+                for col in range(3):
+                    if Current_Cube[Cube_number][row][col]!=self.End_Cube[Cube_number][row][col]:
+                       return False
+        return True
+
+    def Game_Clear(self): # 3-1 게임 클리어시 출력하는 메시지
+        print("축하드립니다. !! 모든 큐브 면을 맞추었습니다.")
+        print("경과시간", timedelta(seconds=int(time.time() - self.Start_Time)))
+        print("조작횟수 : ", self.Command_Count)
     
 
 
