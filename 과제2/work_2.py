@@ -90,42 +90,86 @@ class Cube:
         self.Set_Cube_Left(left_cube)
 
 
+    def Command_Input_List(self):
+        Command_List = list(input("CUBE>").strip())
+        Command_List = List_to_CorrectCommandlist(Command_List)
+        return Command_List
+
+    def Command_Print(self,command):
+        if command=='Q':
+            print('Bye~')
+            exit(0)
+        else:
+            print(command)
+        return
+
+    def Command_Cube(self,command):
+        if command=='U':
+            self.Upper_Push_to_Left()
+        elif command=="U'":
+            self.Upper_Push_to_Right()
+        elif command=='R':
+             self.Right_Push_to_Up()
+        elif command=="R'":
+             self.Right_Push_to_Down()
+        elif command=='L':
+            self.Left_Push_to_Down()
+        elif command=="L'":
+             self.Left_Push_to_Up()
+        elif command=='B':
+            self.Lower_Push_to_Right()
+        elif command=="B'":
+            self.Lower_Push_to_Left()
+        else:
+            return False
+
+        return True
+
+
+
 cube=Cube() # 큐브 객체생성
 cube.Print()
 
 # 명령어에 따라 큐브에 맞는 기능을 실행시켜주는 메인 함수
 while True:
-      Command_List=list(input("CUBE>").strip())
-      Command_List=List_to_CorrectCommandlist(Command_List)
-      for command in Command_List:
-          if command=='Q':
-              print('Bye~')
-              exit(0)
-          elif command=='U':
-               print('U')
-               cube.Upper_Push_to_Left()
-          elif command=="U'":
-               print("U'")
-               cube.Upper_Push_to_Right()
-          elif command=='R':
-               print('R')
-               cube.Right_Push_to_Up()
-          elif command=="R'":
-               print("R'")
-               cube.Right_Push_to_Down()
-          elif command=='L':
-               print('L')
-               cube.Left_Push_to_Down()
-          elif command=="L'":
-               print("L'")
-               cube.Left_Push_to_Up()
-          elif command=='B':
-               print('B')
-               cube.Lower_Push_to_Right()
-          elif command=="B'":
-               print("B'")
-               cube.Lower_Push_to_Left()
-          else: # 잘못된 명령어 인경우
+      #Command_List=list(input("CUBE>").strip())
+      #Command_List=List_to_CorrectCommandlist(Command_List)
+      Command_Input_List=cube.Command_Input_List()
+      for command in Command_Input_List:
+          if cube.Command_Cube(command):
+              cube.Command_Print(command)
+              cube.Print()
+          else:
               continue
 
-          cube.Print() # 현재 큐브상태출력
+          # if command=='Q':
+          #     print('Bye~')
+          #     exit(0)
+          # elif command=='U':
+          #      print('U')
+          #      cube.Upper_Push_to_Left()
+          # elif command=="U'":
+          #      print("U'")
+          #      cube.Upper_Push_to_Right()
+          # elif command=='R':
+          #      print('R')
+          #      cube.Right_Push_to_Up()
+          # elif command=="R'":
+          #      print("R'")
+          #      cube.Right_Push_to_Down()
+          # elif command=='L':
+          #      print('L')
+          #      cube.Left_Push_to_Down()
+          # elif command=="L'":
+          #      print("L'")
+          #      cube.Left_Push_to_Up()
+          # elif command=='B':
+          #      print('B')
+          #      cube.Lower_Push_to_Right()
+          # elif command=="B'":
+          #      print("B'")
+          #      cube.Lower_Push_to_Left()
+          # else: # 잘못된 명령어 인경우
+          #     continue
+
+          #cube.Print() # 현재 큐브상태출력
